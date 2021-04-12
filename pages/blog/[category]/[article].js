@@ -1,8 +1,8 @@
 import Layout from "../../../components/layout";
 import Head from 'next/head';
 import Link from 'next/link';
-import FolderRepository from '../../../util/folderRepository';
-import path from 'path';
+import CategoriesRepository from '../../../repositories/categoriesRepository';
+import ArticlesRepository from '../../../repositories/articlesRepository';
 import { Breadcrumb } from "react-bootstrap";
 
 export default function CategoryIndex({ articleData }) {
@@ -35,12 +35,10 @@ export default function CategoryIndex({ articleData }) {
     )
 }
 
-export async function getStaticPaths() {
-    var categoriesRepository = new FolderRepository(path.join(process.cwd(), 'content', 'categories'));
-    var categoriesAsObjects = await categoriesRepository.getAllObjectOfObjects();
-
-    var articlesRepository = new FolderRepository(path.join(process.cwd(), 'content', 'posts'));
-    var articlesArray = await articlesRepository.getAllArrayOfObjects();
+export async function getStaticPaths() {    
+    var categoriesAsObjects = await CategoriesRepository.getAllObjectOfObjects();
+    
+    var articlesArray = await ArticlesRepository.getAllArrayOfObjects();
 
     var mergedArticleData = articlesArray.map((article) => {
         return (
@@ -65,12 +63,10 @@ export async function getStaticPaths() {
     return { paths: allRoutes, fallback: false }
 }
 
-export async function getStaticProps({ params }) {
-    var categoriesRepository = new FolderRepository(path.join(process.cwd(), 'content', 'categories'));
-    var categoryObject = await categoriesRepository.getOneBySlug(params['category']);
-
-    var articlesRepository = new FolderRepository(path.join(process.cwd(), 'content', 'posts'));
-    var articleObject = await articlesRepository.getOneBySlug(params['article']);
+export async function getStaticProps({ params }) {    
+    var categoryObject = await CategoriesRepository.getOneBySlug(params['category']);
+    
+    var articleObject = await ArticlesRepository.getOneBySlug(params['article']);
 
     var articleData = {
         ...articleObject,

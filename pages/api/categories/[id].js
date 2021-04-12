@@ -1,8 +1,6 @@
-import FolderRepository from '../../../util/folderRepository'
-import path from 'path';
+import CategoriesRepository from '../../../repositories/categoriesRepository';
 
-export default async function categoryHandler(req, res) {
-    var categoriesRepository = new FolderRepository(path.join(process.cwd(), 'content', 'categories'));
+export default async function categoryHandler(req, res) {    
 
     const {
         query: { id },
@@ -13,16 +11,16 @@ export default async function categoryHandler(req, res) {
     switch (method) {
         case 'GET':
             // Get data from your database
-            var category = await categoriesRepository.getOne(id);
+            var category = await CategoriesRepository.getOne(id);
             res.status(200).json(category);
             break
         case 'PUT':
             // Update or create data in your database
-            await categoriesRepository.update(body);
+            await CategoriesRepository.update(body);
             res.status(200).json(body);
             break;
         case 'DELETE':
-            await categoriesRepository.delete(id);
+            await CategoriesRepository.delete(id);
             res.status(204).send();
             break;
         default:

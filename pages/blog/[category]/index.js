@@ -1,8 +1,8 @@
 import Layout from "../../../components/layout";
 import Head from 'next/head';
 import Link from 'next/link';
-import FolderRepository from '../../../util/folderRepository';
-import path from 'path';
+import CategoriesRepository from '../../../repositories/categoriesRepository';
+import ArticlesRepository from '../../../repositories/articlesRepository';
 import { Breadcrumb } from "react-bootstrap";
 
 export default function CategoryIndex({ categoryDetails }) {
@@ -46,9 +46,8 @@ export default function CategoryIndex({ categoryDetails }) {
 
 }
 
-export async function getStaticPaths() {
-    var categoriesRepository = new FolderRepository(path.join(process.cwd(), 'content', 'categories'));
-    var allCategories = await categoriesRepository.getAllArrayOfObjects();
+export async function getStaticPaths() {    
+    var allCategories = await CategoriesRepository.getAllArrayOfObjects();
     var allRoutes = allCategories.map((category) => {
         return (
             {
@@ -62,12 +61,10 @@ export async function getStaticPaths() {
     return { paths: allRoutes, fallback: false }
 }
 
-export async function getStaticProps({ params }) {
-    var categoriesRepository = new FolderRepository(path.join(process.cwd(), 'content', 'categories'));
-    var categoryDetails = await categoriesRepository.getOneBySlug(params['category']);
-
-    var articlesRepository = new FolderRepository(path.join(process.cwd(), 'content', 'posts'));
-    var allArticles = await articlesRepository.getAllArrayOfObjects();
+export async function getStaticProps({ params }) {    
+    var categoryDetails = await CategoriesRepository.getOneBySlug(params['category']);
+    
+    var allArticles = await ArticlesRepository.getAllArrayOfObjects();
     var articlesInCategory = [];
     articlesInCategory = allArticles.map((articleDetails) => {
         if (articleDetails['category'] === categoryDetails['uuid']) {

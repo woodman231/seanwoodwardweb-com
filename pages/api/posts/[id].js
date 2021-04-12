@@ -1,8 +1,6 @@
-import FolderRepository from '../../../util/folderRepository'
-import path from 'path';
+import ArticlesRepository from '../../../repositories/articlesRepository';
 
-export default async function categoryHandler(req, res) {
-    var postsRepository = new FolderRepository(path.join(process.cwd(), 'content', 'posts'));
+export default async function postHandler(req, res) {
 
     const {
         query: { id },
@@ -13,16 +11,16 @@ export default async function categoryHandler(req, res) {
     switch (method) {
         case 'GET':
             // Get data from your database
-            var category = await postsRepository.getOne(id);
-            res.status(200).json(category);
+            var article = await ArticlesRepository.getOne(id);
+            res.status(200).json(article);
             break
         case 'PUT':
             // Update or create data in your database
-            await postsRepository.update(body);
+            await ArticlesRepository.update(body);
             res.status(200).json(body);
             break;
         case 'DELETE':
-            await postsRepository.delete(id);
+            await ArticlesRepository.delete(id);
             res.status(204).send();
             break;
         default:
