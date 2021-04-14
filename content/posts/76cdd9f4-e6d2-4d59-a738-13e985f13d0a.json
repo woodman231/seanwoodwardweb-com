@@ -1,0 +1,8 @@
+{
+	"category": "13727564-5ba2-460d-99cc-5ac55be8b015",
+	"title": "Test Article 3",
+	"slug": "test-article-3",
+	"created": "2021-04-14",
+	"content": "<p>This is a test. This is only a test. Had it been anything else, then it would not have said test.</p>\n<pre class=\"language-javascript\"><code>var myString = 'Hello World';\nconsole.log(myString);</code></pre>\n<p>Now here is some more content after the code block.</p>\n<p><img style=\"float: left;\" src=\"../../../ITLeavingMeme.jpg\" alt=\"\" width=\"589\" height=\"610\" /> Here is some more content to the left of the picture.</p>\n<p>&nbsp;</p>",
+	"uuid": "76cdd9f4-e6d2-4d59-a738-13e985f13d0a"
+}
