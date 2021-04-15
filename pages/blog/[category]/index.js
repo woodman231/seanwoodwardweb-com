@@ -4,12 +4,11 @@ import Link from 'next/link';
 import CategoriesRepository from '../../../repositories/categoriesRepository';
 import ArticlesRepository from '../../../repositories/articlesRepository';
 import { Breadcrumb } from "react-bootstrap";
+import sortDescendingByDate from '../../../util/sortDescendingByDate';
 
-export default function CategoryIndex({ categoryDetails }) {
+import ArticlesListComponent from '../../../components/articlesListComponent';
 
-    const articleLink = function (categoryDetails, articleDetails) {
-        return `/blog/${categoryDetails['slug']}/${articleDetails['slug']}`;
-    }
+export default function CategoryIndex({ categoryDetails }) {    
 
     return (
         <Layout>
@@ -24,23 +23,7 @@ export default function CategoryIndex({ categoryDetails }) {
             </Breadcrumb>
             <h4>{categoryDetails['title']}</h4>
             <p>{categoryDetails['description']}</p>
-            <h5>Articles in Category "{categoryDetails['title']}"</h5>
-            <ul>
-                {
-                    categoryDetails.articlesInCategory && categoryDetails.articlesInCategory.map((articleInCategory, articleInCategoryIndex) => {
-                        if (articleInCategory['slug']) {
-                            return (
-                                <li key={articleInCategoryIndex}>
-                                    <Link href={articleLink(categoryDetails, articleInCategory)}>
-                                        <a>{articleInCategory['title']}</a>
-                                    </Link>
-                                </li>
-
-                            )
-                        }
-                    })
-                }
-            </ul>
+            <ArticlesListComponent allArticles={categoryDetails['articlesInCategory']} />
         </Layout>
     )
 
@@ -68,11 +51,16 @@ export async function getStaticProps({ params }) {
     var articlesInCategory = [];
     articlesInCategory = allArticles.map((articleDetails) => {
         if (articleDetails['category'] === categoryDetails['uuid']) {
-            return articleDetails
+            return {
+                ...articleDetails,
+                category: JSON.parse(JSON.stringify(categoryDetails))
+            }
         }
     });
 
     if (articlesInCategory[0] !== undefined) {
+        articlesInCategory.sort(sortDescendingByDate);        
+
         categoryDetails['articlesInCategory'] = articlesInCategory;
     }
 

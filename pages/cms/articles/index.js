@@ -2,6 +2,7 @@ import Layout from "../../../components/layout";
 import Head from 'next/head';
 import Link from 'next/link'
 import { useState, useEffect } from 'react';
+import sortDescendingByDate from '../../../util/sortDescendingByDate';
 
 function BlogCmsArticlesHomePage() {
     const [articlesList, setArticlesList] = useState([]);
@@ -12,13 +13,14 @@ function BlogCmsArticlesHomePage() {
 
         var articlesRes = await fetch(`/api/posts/`);
         var downloadedArticles = await articlesRes.json();
+        downloadedArticles.sort(sortDescendingByDate);
         var newArticlesState = downloadedArticles.map((downloadedArticle) => {
             return {
                 uuid: downloadedArticle['uuid'],
                 category: downloadedCategories[downloadedArticle['category']],
                 title: downloadedArticle['title'],
                 slug: downloadedArticle['slug'],
-                created: downloadedArticle['created'],
+                date: downloadedArticle['date'],
                 content: downloadedArticle['content']
             }
         });
@@ -63,7 +65,7 @@ function BlogCmsArticlesHomePage() {
                                                 <a>(view)</a>
                                             </Link>
                                         </td>
-                                        <td>{article['created']}</td>
+                                        <td>{new Date(article['date']).toLocaleString()}</td>
                                         <td>{article['title']}</td>
                                         <td>{article['slug']}</td>
                                         <td>{article['category']['title']}</td>

@@ -1,4 +1,4 @@
-import fsp from 'fs/promises';
+import { promises as fsp } from 'fs';
 import path from 'path';
 import { v4 } from 'uuid';
 
@@ -74,13 +74,21 @@ export default class FolderRepository {
             object['uuid'] = v4();
         }
 
+        if(!object['date']) {
+            object['date'] = new Date().valueOf();
+        }
+
         var fileName = path.join(this._folderPath, `${object['uuid']}.json`);
         await fsp.writeFile(fileName, JSON.stringify(object, null, '\t'));
     }
 
-    async update(object) {
+    async update(object, updateDate) {
         if (!object['uuid']) {
             object['uuid'] = v4();
+        }
+
+        if(updateDate && updateDate == true) {
+            object['date'] = new Date().valueOf();
         }
 
         var fileName = path.join(this._folderPath, `${object['uuid']}.json`);

@@ -6,6 +6,7 @@ import ArticlesRepository from '../../../repositories/articlesRepository';
 import { Breadcrumb } from "react-bootstrap";
 import Prism from "prismjs";
 import {useEffect} from 'react';
+import "prismjs/components/prism-csharp";
 
 export default function CategoryIndex({ articleData }) {
 
@@ -34,8 +35,8 @@ export default function CategoryIndex({ articleData }) {
                     </Link>
                     <Breadcrumb.Item active>{articleData['title']}</Breadcrumb.Item>
                 </Breadcrumb>                
-                <h4 className="display-4">{articleData['title']}</h4>
-                <p>By Sean Woodward on {articleData['created']} in <Link href={categoryLink(articleData['category'])}><a>{articleData['category']['title']}</a></Link></p>
+                <h1 className="display-4">{articleData['title']}</h1>
+                <p>By Sean Woodward on {new Date(articleData['date']).toLocaleDateString()} in <Link href={categoryLink(articleData['category'])}><a>{articleData['category']['title']}</a></Link></p>
                 <div dangerouslySetInnerHTML={{__html:articleData['content']}}></div>
             </Layout>            
         </>
@@ -54,7 +55,7 @@ export async function getStaticPaths() {
                 'category': categoriesAsObjects[article['category']]
             }
         )
-    });
+    });    
 
     var allRoutes = mergedArticleData.map((articleData) => {
         return (

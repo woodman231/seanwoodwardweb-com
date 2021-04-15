@@ -16,7 +16,7 @@ export default async function postHandler(req, res) {
             break
         case 'PUT':
             // Update or create data in your database
-            await ArticlesRepository.update(body);
+            await ArticlesRepository.update(body, true);
             res.status(200).json(body);
             break;
         case 'DELETE':

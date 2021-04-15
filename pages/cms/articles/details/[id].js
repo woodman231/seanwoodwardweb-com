@@ -52,12 +52,20 @@ export default function ArticleDetails() {
     });
   };
 
+  const updateDescription = (e) => {
+    var newDescription = e.target.value;
+    setArticleState({
+      ...articleState,
+      description: newDescription,
+    });
+  };  
+
   const updateArticleContent = (newContent, editor) => {
     setArticleState({
       ...articleState,
       content: newContent,
     });
-  };  
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -133,11 +141,19 @@ export default function ArticleDetails() {
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Created</Form.Label>
+            <Form.Label>Date</Form.Label>
+            <div className="form-control" readonly>
+              {new Date(articleState.date).toLocaleString()}
+            </div>
+            <Form.Text>The date will be updated after saving</Form.Text>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Description</Form.Label>
             <Form.Control
-              value={articleState.created}
-              onChange={(e) => updateArticleDate(e)}
-              type="date"
+              as="textarea"
+              rows={3}
+              value={articleState.description}
+              onChange={(e) => updateDescription(e)}
             />
           </Form.Group>
           <Form.Group>
@@ -153,9 +169,9 @@ export default function ArticleDetails() {
                   "insertdatetime media table paste code help wordcount codesample",
                 ],
                 toolbar:
-                  "undo redo | formatselect | bold italic backcolor | \
+                  "undo redo | formatselect | bold italic underline | backcolor | \
              alignleft aligncenter alignright alignjustify | \
-             bullist numlist outdent indent | removeformat | link image codesample | help",
+             bullist numlist outdent indent | removeformat | link image codesample | code",
               }}
               onEditorChange={updateArticleContent}
             />
