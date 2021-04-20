@@ -1,0 +1,9 @@
+{
+	"category": "2ee94573-dd0f-4f8f-a5a5-8c64af57327e",
+	"title": "Contact Center After Hours Messaging",
+	"slug": "contact-center-after-hours-messaging",
+	"description": "Messages received over night need to be handled in the morning.",
+	"content": "<p>The contact center had a process where they would receive specific phone calls from specific customer's which would be handled by a different on-site support team the following morning. This support team didn't have a formalized ticket system; however they did need to receive the messages. The group did not want to receive the messages one at a time, rather they wanted the messages to come in one day at a time in one spreadsheet.</p>\n<p>The business had already put together a SharePoint system where they would record these calls on a SharePoint list, export the list to Excel, email the list, and mark the items as \"Sent\".</p>\n<p>I developed this application \"from soup to nuts\" as a full stack developer.</p>\n<p>I added one new Schema's and a few Tables to the existing <a href=\"../../blog/projects/contact-center-master-roster\">MasterRoster</a> database.</p>\n<p>The application was written using .NET Framework. One Web App, and a Microservice that ran every day to automatically send the night's messages in one spreadsheet to a specific distribution list of email addresses.</p>\n<p>The application went live on October 15th, 2019, and still in use today. It has been used to track over 7,500 messages.</p>",
+	"uuid": "76c46123-060a-410a-acc2-f6d43db1baaa",
+	"date": 1618952270717
+}
