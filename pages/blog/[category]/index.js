@@ -48,17 +48,20 @@ export async function getStaticProps({ params }) {
     var categoryDetails = await CategoriesRepository.getOneBySlug(params['category']);
     
     var allArticles = await ArticlesRepository.getAllArrayOfObjects();
-    var articlesInCategory = [];
-    articlesInCategory = allArticles.map((articleDetails) => {
-        if (articleDetails['category'] === categoryDetails['uuid']) {
-            return {
+    var articlesInCategory = [];    
+
+    for(var i=0; i<allArticles.length; i++) {
+        var articleDetails = allArticles[i];
+
+        if(articleDetails['category'] === categoryDetails['uuid']) {
+            articlesInCategory.push({
                 ...articleDetails,
                 category: JSON.parse(JSON.stringify(categoryDetails))
-            }
+            });
         }
-    });
+    }
 
-    if (articlesInCategory[0] !== undefined) {
+    if (articlesInCategory.length > 0) {
         articlesInCategory.sort(sortDescendingByDate);        
 
         categoryDetails['articlesInCategory'] = articlesInCategory;

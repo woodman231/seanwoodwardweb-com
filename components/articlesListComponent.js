@@ -16,13 +16,13 @@ export default function articlesListComponent({ allArticles }) {
       <ListGroup>
         {allArticles && allArticles.map((article, articleIndex) => {
           return (
-            <Link href={articleLink(article)} passHref>
+            <Link key={articleIndex} href={articleLink(article)} passHref>
               <ListGroupItem
                 as="a"
                 className="list-group-item-action flex-column align-item-start"
               >
-                <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1">{article["title"]}</h5>
+                <div className="d-flex w-100 justify-content-between">
+                  <h5 className="mb-1">{article["title"]}</h5>
                   <small>
                     {new Date(article["date"]).toLocaleDateString()}
                   </small>

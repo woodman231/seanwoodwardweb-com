@@ -12,7 +12,13 @@ export default function MyNav({ preview, children }) {
                 <Nav className="mr-auto">
                     <Link href="/blog" passHref>
                         <Nav.Link>Blog</Nav.Link>
-                    </Link>                    
+                    </Link>
+                    <Link href="/blog/projects" passHref>
+                        <Nav.Link>Projects</Nav.Link>
+                    </Link>
+                    <Link href="/blog/achievements-awards" passHref>
+                        <Nav.Link>Achievements / Awards</Nav.Link>
+                    </Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

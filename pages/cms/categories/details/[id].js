@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react';
 import {Form, Button} from 'react-bootstrap';
+import slugifyString from '../../../../util/slugifyString';
 
 export default function CategoryDetails() {
     const [categoryState, setCategoryState] = useState({});

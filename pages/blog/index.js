@@ -42,7 +42,7 @@ function BlogHomePage({ allArticles, allCategories }) {
                                 {
                                     allCategories.map((category, categoryIndex) => {
                                         return (
-                                            <Link href={categoryLink(category)} passHref>
+                                            <Link key={categoryIndex} href={categoryLink(category)} passHref>
                                                 <ListGroupItem as="a" className="list-group-item-action">
                                                     <h5>{category['title']}</h5>
                                                 </ListGroupItem>
