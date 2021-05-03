@@ -8,7 +8,7 @@ function HomePage() {
                 <Head>
                     <title>Sean Woodward | Home</title>
                 </Head>
-                <img src="/SeanWoodward.jpg" alt="Sean Woodward" width="159" height="212" className="float-left mr-3" />
+                <img src="/SeanWoodward.jpg" alt="Sean Woodward" width="235" height="225" className="img-fluid float-left mr-3" />
                 <p className="float-none">
                     Hello, I am Sean Woodward. <br /> <br />
                     My specialty is converting business need in to software. Most times companies will have some processes that started with an Excel file, then became an Access Database or SharePoint list and now needs a Web App, Reports, and probably some ETL processes as well. That is where I come in. I will understand the business need, the current state, the desired future state, and exceed at providing the desired result. <br /> <br />
