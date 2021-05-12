@@ -20,6 +20,7 @@ function HomePage() {
                         <p>I have a Masters Degree in Computer Information Systems which I obtained from Independence University.</p>
                         <p>As well as working experience with the Microsoft suite of web development tools, I also use NodeJS for my own personal projects. Infact, this Portfolio / Blog is made using Next.js.</p>
                         <p>Contact me <a href="mailto:SeanWoodward@seanwoodwardweb.com">SeanWoodward@seanwoodwardweb.com</a></p>                        
+                        <p>Schedule an appointment with me <a href="https://calendly.com/seanwoodward">https://calendly.com/seanwoodward</a></p>
                     </div>
                 </Jumbotron>
                 
